@@ -51,7 +51,7 @@ export function Hero() {
           <div className="relative group p-2 bg-zinc-900/40 border border-zinc-800/80 rounded-3xl backdrop-blur-md shadow-2xl transition-all duration-500 hover:border-zinc-700/50 hover:-translate-y-1">
             <div className="relative overflow-hidden rounded-2xl w-[280px] h-[280px] sm:w-[320px] sm:h-[320px]">
               <Image
-                src="/avatar.png"
+                src="/avatar.jpg"
                 alt="Alfanro avatar"
                 fill
                 priority
