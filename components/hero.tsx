@@ -44,7 +44,7 @@ export function Hero() {
         </div>
 
         {/* Right Column: Full Screen Photo */}
-        <div className="relative h-[450px] md:h-full w-full overflow-hidden border-t md:border-t-0 md:border-l border-zinc-900">
+        <div className="relative h-[450px] md:h-full w-full overflow-hidden">
           <Image
             src="/avatar.jpg"
             alt="Alfanro portrait"
