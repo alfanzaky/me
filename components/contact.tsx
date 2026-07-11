@@ -1,160 +1,133 @@
 "use client";
 
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Mail, Send } from "lucide-react";
+import React from "react";
+import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function Contact() {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<string | null>(null);
+  const socialLinks = [
+    {
+      name: "WhatsApp",
+      description: "Chat langsung untuk diskusi cepat atau konsultasi.",
+      url: "https://wa.me/message/QJASSFKR6YNDJ1",
+      icon: (
+        <svg className="w-8 h-8 text-emerald-400 group-hover:text-emerald-300 transition-colors" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M12.004 2C6.48 2 2 6.48 2 12.004c0 1.762.457 3.417 1.257 4.869L2 22l5.289-1.388c1.39.756 2.975 1.196 4.664 1.196 5.523 0 10.05-4.481 10.05-10.004C22.004 6.48 17.527 2 12.004 2zm0 18.008c-1.503 0-2.915-.401-4.14-1.1l-.297-.174-3.08.808.822-3.003-.191-.304a8.012 8.012 0 0 1-1.229-4.231c0-4.422 3.6-8.022 8.026-8.022 4.422 0 8.022 3.6 8.022 8.022 0 4.426-3.6 8.026-8.022 8.026z"
+          />
+        </svg>
+      ),
+      hoverGlow: "hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.08)]",
+    },
+    {
+      name: "LinkedIn",
+      description: "Terhubung secara profesional dan perluas jaringan karir.",
+      url: "YOUR_LINKEDIN_LINK_HERE", // Silakan ganti manual
+      icon: (
+        <svg className="w-8 h-8 text-blue-400 group-hover:text-blue-300 transition-colors" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+          />
+        </svg>
+      ),
+      hoverGlow: "hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.08)]",
+    },
+    {
+      name: "Instagram",
+      description: "Ikuti aktivitas harian dan visual proyek terbaru saya.",
+      url: "https://www.instagram.com/alfan.ro/",
+      icon: (
+        <svg className="w-8 h-8 text-pink-400 group-hover:text-pink-300 transition-colors" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204 0.013-3.583 0.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051C.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"
+          />
+        </svg>
+      ),
+      hoverGlow: "hover:border-pink-500/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.08)]",
+    },
+    {
+      name: "Telegram",
+      description: "Hubungi langsung melalui jalur obrolan Telegram.",
+      url: "https://t.me/blinks_id",
+      icon: (
+        <svg className="w-8 h-8 text-sky-400 group-hover:text-sky-300 transition-colors" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.18l-1.92 9.07c-.14.65-.53.81-1.08.5L11.6 15.5l-1.42 1.37c-.16.16-.29.29-.6.29l.21-3.01 5.48-4.95c.24-.22-.05-.34-.37-.13l-6.78 4.27-2.92-.91c-.64-.2-.65-.64.13-.94l11.39-4.39c.53-.19.99.13.82.97z"
+          />
+        </svg>
+      ),
+      hoverGlow: "hover:border-sky-500/50 hover:shadow-[0_0_30px_rgba(14,165,233,0.08)]",
+    },
+  ];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !message) {
-      setStatus("Please fill in all fields.");
-      return;
-    }
-    // Simulate submission
-    setStatus("Message sent successfully!");
-    setEmail("");
-    setMessage("");
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" as const },
+    },
   };
 
   return (
-    <section id="contact" className="py-24 px-6 relative">
+    <section id="contact" className="py-24 px-6 relative bg-zinc-950">
       {/* Background Glow */}
-      <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-zinc-800/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-zinc-800/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-2xl mx-auto relative z-10 text-center">
-        <div className="space-y-3 mb-12">
-          <h2 className="text-sm font-semibold tracking-wider text-zinc-400 uppercase">Get In Touch</h2>
+      <div className="max-w-4xl mx-auto relative z-10">
+        <div className="text-center space-y-3 mb-16">
           <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent">
-            Let's Collaborate
-          </p>
-          <p className="text-zinc-400 max-w-md mx-auto text-sm">
-            Have a project in mind, want to discuss a job opportunity, or just want to say hello? Drop me a message.
+            Let's Connect
           </p>
         </div>
 
-        <Card className="bg-zinc-900/30 border-zinc-800/80 backdrop-blur-sm shadow-2xl text-left">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-lg font-bold text-zinc-100">Send Message</CardTitle>
-            <CardDescription className="text-zinc-400 text-xs">
-              I'll get back to you within 24 hours.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
-                  Your Email Address
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@example.com"
-                  className="w-full px-4 py-3 bg-zinc-950/50 border border-zinc-800/80 rounded-lg text-sm text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-700 focus:border-zinc-700 transition-all placeholder:text-zinc-600"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
-                  Message
-                </label>
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Hi Alfanro, I'd like to discuss..."
-                  rows={4}
-                  className="w-full px-4 py-3 bg-zinc-950/50 border border-zinc-800/80 rounded-lg text-sm text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-700 focus:border-zinc-700 transition-all placeholder:text-zinc-600 resize-none"
-                />
-              </div>
-
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-zinc-100 text-zinc-950 hover:bg-zinc-200 transition-colors font-medium flex items-center justify-center gap-2"
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid sm:grid-cols-2 gap-6"
+        >
+          {socialLinks.map((social, i) => (
+            <motion.div key={i} variants={cardVariants}>
+              <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`bg-zinc-900/30 border border-zinc-800/80 backdrop-blur-sm p-6 rounded-2xl flex items-center justify-between transition-all duration-300 transform hover:-translate-y-1 group ${social.hoverGlow}`}
               >
-                <Send className="w-4.5 h-4.5" />
-                Send Message
-              </Button>
-
-              {status && (
-                <p className={`text-xs text-center mt-3 ${status.includes("successfully") ? "text-emerald-400" : "text-rose-400"}`}>
-                  {status}
-                </p>
-              )}
-            </form>
-          </CardContent>
-        </Card>
-
-        {/* Social Links */}
-        <div className="mt-12 flex justify-center gap-6">
-          <a
-            href="#"
-            className="w-10 h-10 bg-zinc-900/40 border border-zinc-800/80 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-100 hover:border-zinc-700/80 transition-all"
-            title="GitHub"
-          >
-            <svg
-              className="w-4.5 h-4.5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-              <path d="M9 18c-4.51 2-5-2-7-2" />
-            </svg>
-          </a>
-          <a
-            href="#"
-            className="w-10 h-10 bg-zinc-900/40 border border-zinc-800/80 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-100 hover:border-zinc-700/80 transition-all"
-            title="LinkedIn"
-          >
-            <svg
-              className="w-4.5 h-4.5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-              <rect width="4" height="12" x="2" y="9" />
-              <circle cx="4" cy="4" r="2" />
-            </svg>
-          </a>
-          <a
-            href="#"
-            className="w-10 h-10 bg-zinc-900/40 border border-zinc-800/80 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-100 hover:border-zinc-700/80 transition-all"
-            title="Twitter"
-          >
-            <svg
-              className="w-4.5 h-4.5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-            </svg>
-          </a>
-          <a
-            href="mailto:contact@example.com"
-            className="w-10 h-10 bg-zinc-900/40 border border-zinc-800/80 rounded-full flex items-center justify-center text-zinc-400 hover:text-zinc-100 hover:border-zinc-700/80 transition-all"
-            title="Email"
-          >
-            <Mail className="w-4.5 h-4.5" />
-          </a>
-        </div>
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-zinc-950/45 border border-zinc-800/80 rounded-xl group-hover:border-zinc-700/80 transition-colors duration-300">
+                    {social.icon}
+                  </div>
+                  <div className="text-left space-y-1">
+                    <h3 className="text-base font-bold text-zinc-100 group-hover:text-zinc-50 transition-colors duration-300">
+                      {social.name}
+                    </h3>
+                    <p className="text-xs text-zinc-400 leading-relaxed max-w-[200px]">
+                      {social.description}
+                    </p>
+                  </div>
+                </div>
+                <ArrowUpRight className="w-5 h-5 text-zinc-600 group-hover:text-zinc-300 transition-all duration-300 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
+              </a>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
