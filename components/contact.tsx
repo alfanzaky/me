@@ -9,7 +9,7 @@ export function Contact() {
     {
       name: "WhatsApp",
       description: "Chat langsung untuk diskusi cepat atau konsultasi.",
-      url: "https://wa.me/message/QJASSFKR6YNDJ1",
+      url: "#",
       icon: (
         <svg className="w-8 h-8 text-emerald-400 group-hover:text-emerald-300 transition-colors" viewBox="0 0 24 24">
           <path
@@ -37,7 +37,7 @@ export function Contact() {
     {
       name: "Instagram",
       description: "Ikuti aktivitas harian dan visual proyek terbaru saya.",
-      url: "https://www.instagram.com/alfan.ro/",
+      url: "#",
       icon: (
         <svg className="w-8 h-8 text-pink-400 group-hover:text-pink-300 transition-colors" viewBox="0 0 24 24">
           <path
